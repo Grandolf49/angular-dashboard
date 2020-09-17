@@ -74,7 +74,11 @@ export class AreaComponent implements OnInit {
         data: [2, 2, 2, 6, 13, 30, 46]
       }]
     };
-
+    setTimeout(() => {
+      window.dispatchEvent(
+        new Event('resize')
+      );
+    }, 300);
     HC_exporting(HighCharts);
   }
 }

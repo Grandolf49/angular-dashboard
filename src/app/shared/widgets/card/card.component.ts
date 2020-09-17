@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import * as HighCharts from 'highcharts';
-import HC_exporting from 'highcharts/modules/exporting';
+//import HC_exporting from 'highcharts/modules/exporting';
 
 @Component({
   selector: 'app-widget-card',
@@ -8,6 +8,10 @@ import HC_exporting from 'highcharts/modules/exporting';
   styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnInit {
+
+  @Input() label: string
+  @Input() total: string
+  @Input() percentage: string
 
   highCharts = HighCharts
   chartOptions = {}
@@ -20,49 +24,30 @@ export class CardComponent implements OnInit {
         type: 'area'
       },
       title: {
-        text: 'Demo'
+        text: null
       },
       subtitle: {
-        text: 'Source: Wikipedia.org'
-      },
-      xAxis: {
-        categories: ['1750', '1800', '1850', '1900', '1950', '1999', '2050'],
-        tickmarkPlacement: 'on',
-        title: {
-          enabled: false
-        }
-      },
-      yAxis: {
-        title: {
-          text: 'Billions'
-        },
-        labels: {
-          formatter: function () {
-            return this.value / 1000;
-          }
-        }
+        text: null
       },
       tooltip: {
         split: true,
-        valueSuffix: ' millions'
+        outside: true
       },
-      plotOptions: {
-        area: {
-          stacking: 'normal',
-          lineColor: '#666666',
-          lineWidth: 1,
-          marker: {
-            lineWidth: 1,
-            lineColor: '#666666'
-          }
-        }
+      legend: {
+        enabled: false
+      },
+      export: {
+        enabled: false
       },
       series: [{
-        data: [71, 70, 30, 66]
+        data: [41, 60, 30, 66]
       }]
     };
 
-    HC_exporting(HighCharts);
+    setTimeout(() => {
+      window.dispatchEvent(
+        new Event('resize')
+      );
+    }, 300);
   }
-
 }
